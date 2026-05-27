@@ -1,0 +1,32 @@
+{
+  "mode": "multi",
+  "world": "basic",
+  "fast": false,
+  "minimize": false,
+  "batch": false,
+  "validate_only": false,
+  "skip_validate": true,
+  "webots": "",
+  "cars": [
+    {
+      "path": "controllers\\example\\my_controller.py",
+      "slot": "car_1",
+      "team": "my_controller"
+    },
+    {
+      "path": "controllers\\example\\example_controller.py",
+      "slot": "car_2",
+      "team": "example_controller"
+    },
+    {
+      "path": "controllers\\example\\slow_forward_controller.py",
+      "slot": "car_3",
+      "team": "slow"
+    },
+    {
+      "path": "controllers\\example\\fast_forward_controller.py",
+      "slot": "car_4",
+      "team": "fast"
+    }
+  ]
+}

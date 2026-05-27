@@ -1,0 +1,29 @@
+{
+  "session_id": "local_race",
+  "session_type": "practice",
+  "total_laps": 1,
+  "recording_path": "E:\\Airacer\\airacer G06\\sdk\\.local\\recordings",
+  "recorded_at": "2026-05-27T09:35:14",
+  "duration_sim": 4.064,
+  "total_frames": 127,
+  "teams": [
+    {
+      "team_id": "my_controller",
+      "team_name": "my_controller"
+    },
+    {
+      "team_id": "example_controller",
+      "team_name": "example_controller"
+    },
+    {
+      "team_id": "slow",
+      "team_name": "slow"
+    },
+    {
+      "team_id": "fast",
+      "team_name": "fast"
+    }
+  ],
+  "finish_reason": "supervisor_stop",
+  "final_rankings": []
+}

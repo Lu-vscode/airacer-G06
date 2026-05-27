@@ -1,0 +1,106 @@
+# AI Racer 本地校验规则（SDK 作用域）
+# ---------------------------------------------------------------------------
+# 仅 sdk/validate_controller.py 读取；不影响 Backend。
+# 若要从源码层面对齐线上沙箱行为，请同步检查以下两份黑白名单（都随 SDK 分发）：
+#   - sdk/car_sandbox.py                              （运行时受限 importer）
+#   - sdk/webots/controllers/car/sandbox_runner.py    （meta_path 黑名单）
+# 一致性由 sdk/tests/test_consistency.py 硬性断言。
+# ---------------------------------------------------------------------------
+
+file:
+  max_size_kb: 100
+  encoding: utf-8
+
+imports:
+  # 白名单——允许 import 的顶层模块（与沙箱 _ALLOWED_MODULES 对齐）
+  allow:
+    - numpy
+    - cv2
+    - math
+    - collections
+    - heapq
+    - functools
+    - itertools
+    - typing          # 纯注解，允许
+    - __future__      # 语法 future 声明，编译期处理，不是真正的 import
+    - pathlib         # 路径操作，允许只读用途
+    - dataclasses     # 数据类装饰器，允许
+    - re              # 正则表达式，允许
+
+  # 黑名单——显式拒绝（优先级高于 allow）
+  # 与 simnode/car_sandbox.py::_BLOCKED_PREFIXES 对齐 + Windows 特定项
+  deny:
+    - os
+    - sys
+    - socket
+    - subprocess
+    - multiprocessing
+    - threading
+    - time
+    - datetime
+    - io
+    - builtins
+    - ctypes
+    - shutil
+    - tempfile
+    - requests
+    - urllib
+    - http
+    - ftplib
+    - smtplib
+    - signal
+    - gc
+    - inspect
+    - importlib
+    - glob
+    - fnmatch
+    - winreg
+    - nt
+    - _winapi
+
+  # 非黑名单且不在白名单——warn 提示"线上可能加载失败"
+  warn_on_unknown: true
+
+builtins:
+  # 禁止调用的内置函数/名字（AST Call 匹配）
+  deny_calls:
+    - eval
+    - exec
+    - compile
+    - open
+    - globals
+    - locals
+    - input
+    - breakpoint
+    - __import__
+    - vars
+  # 真·沙箱逃逸属性 —— 访问即 error（E007）
+  # 这些属性在线上 RESTRICTED_BUILTINS 下访问或使用会失败，必须拦截。
+  escape_attrs:
+    - __globals__
+    - __builtins__
+    - __subclasses__
+    - __mro__
+    - __code__
+    - __closure__
+    - func_globals
+  # 一般可疑 dunder —— 仅 warn（W007）
+  # 这些属性有合法用法，模块顶层作用域 Python 还会隐式定义 __spec__/__loader__，
+  # 故只做提示，不阻塞提交。
+  suspicious_attrs:
+    - __loader__
+    - __spec__
+    - __import__
+
+interface:
+  entry: control          # 模块必须提供的可调用名
+  arity: 3                # 形参数量（left_img, right_img, timestamp）
+  return_ranges:
+    steering: [-1.0, 1.0]
+    speed:    [0.0,  1.0]
+
+runtime:
+  soft_timeout_ms: 20     # 单帧软上限（与线上 sandbox read_line_timeout 一致）
+  mock_calls: 30          # mock 调用次数（首调不计入，降低冷启动抖动）
+  image_shape: [480, 640, 3]
+  image_dtype: uint8

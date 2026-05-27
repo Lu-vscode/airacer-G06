@@ -1,0 +1,49 @@
+{
+  "race_id": "local_race",
+  "session_type": "practice",
+  "total_laps": 1,
+  "recording_path": "E:\\Airacer\\airacer G06\\sdk\\.local\\recordings",
+  "cars": [
+    {
+      "car_id": "car_0",
+      "slot": "car_1",
+      "team": "my_controller",
+      "controller_path": "E:\\Airacer\\airacer G06\\controllers\\example\\my_controller.py",
+      "car_slot": "car_1",
+      "team_id": "my_controller",
+      "team_name": "my_controller",
+      "code_path": "E:\\Airacer\\airacer G06\\controllers\\example\\my_controller.py"
+    },
+    {
+      "car_id": "car_1",
+      "slot": "car_2",
+      "team": "example_controller",
+      "controller_path": "E:\\Airacer\\airacer G06\\controllers\\example\\example_controller.py",
+      "car_slot": "car_2",
+      "team_id": "example_controller",
+      "team_name": "example_controller",
+      "code_path": "E:\\Airacer\\airacer G06\\controllers\\example\\example_controller.py"
+    },
+    {
+      "car_id": "car_2",
+      "slot": "car_3",
+      "team": "slow",
+      "controller_path": "E:\\Airacer\\airacer G06\\controllers\\example\\slow_forward_controller.py",
+      "car_slot": "car_3",
+      "team_id": "slow",
+      "team_name": "slow",
+      "code_path": "E:\\Airacer\\airacer G06\\controllers\\example\\slow_forward_controller.py"
+    },
+    {
+      "car_id": "car_3",
+      "slot": "car_4",
+      "team": "fast",
+      "controller_path": "E:\\Airacer\\airacer G06\\controllers\\example\\fast_forward_controller.py",
+      "car_slot": "car_4",
+      "team_id": "fast",
+      "team_name": "fast",
+      "code_path": "E:\\Airacer\\airacer G06\\controllers\\example\\fast_forward_controller.py"
+    }
+  ],
+  "world": "basic"
+}

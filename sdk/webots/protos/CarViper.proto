@@ -1,0 +1,48 @@
+#VRML_SIM R2025a utf8
+# license: MIT
+# licenseUrl: https://opensource.org/licenses/MIT
+# tags: static
+# Airacer Car Model - Viper (毒蛇绿极速车) - Inherits TeslaModel3
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/vehicles/protos/tesla/TeslaModel3.proto"
+
+PROTO CarViper [
+  field SFString name "car_viper"
+  field SFVec3f translation 0 0 0.4
+  field SFRotation rotation 0 0 1 0
+  field SFString controller "car"
+]
+{
+  TeslaModel3 {
+    translation IS translation
+    rotation IS rotation
+    controller IS controller
+    name IS name
+    color 0.1333 0.5451 0.1333
+    sensorsSlotFront [
+    Pose {
+      translation 0 0 1.5
+      children [
+        Camera {
+          translation 0.06 0.08 0.25
+          rotation 0 1 0 0.2
+          name "right_camera"
+          fieldOfView 1.047
+          width 640
+          height 480
+          far 100
+        }
+        Camera {
+          translation -0.06 0.08 0.25
+          rotation 0 1 0 0.2
+          name "left_camera"
+          fieldOfView 1.047
+          width 640
+          height 480
+          far 100
+        }
+      ]
+    }
+  ]
+  }
+}
